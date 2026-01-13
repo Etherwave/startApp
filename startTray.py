@@ -8,6 +8,8 @@ import pystray
 from pystray import MenuItem as item
 from PIL import Image, ImageDraw
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 
 class ProcLableButtonsFrame(Frame):
     def __init__(self, parentFrame, program, font):
@@ -88,6 +90,7 @@ class AppGUI:
         self.icon = None
         self.programs = [
             "cmd.exe /c set ENABLE_LOCAL_VIP=true && node D:\\code\\node\\modules\\node_modules\\@unblockneteasemusic\\server\\app.js -p 11111:11112",
+            "D:\\software\\cloudmusic\\install\\CloudMusic\\cloudmusic.exe",
         ]
         self.frames = []
 
@@ -100,7 +103,7 @@ class AppGUI:
         self.line_dis = 30
         self.hight = 170 + len(self.programs) * self.line_dis
         self.root.geometry(f"{self.width}x{self.hight}")
-        self.icon_path = "avatar.ico"
+        self.icon_path = BASE_DIR + "/avatar.ico"
         self.root.iconbitmap(self.icon_path)
         self.root.protocol("WM_DELETE_WINDOW", self.hide_window)
 
@@ -119,6 +122,7 @@ class AppGUI:
         self.root.withdraw()  # 初始隐藏
 
         menu = (
+            item("全部启动", lambda _: self.start_all()),
             item('显示窗口', lambda _: self.show_window()),
             item('退出', lambda _: self.exit_app())
         )
