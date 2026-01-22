@@ -102,7 +102,11 @@ class AppGUI:
         self.width = 300
         self.line_dis = 30
         self.hight = 170 + len(self.programs) * self.line_dis
-        self.root.geometry(f"{self.width}x{self.hight}")
+        windows_width = self.root.winfo_screenwidth()
+        windows_height = self.root.winfo_screenheight()
+        x = (windows_width - self.width - 200)
+        y = (windows_height - self.hight - 80)
+        self.root.geometry(f"{self.width}x{self.hight}+{x}+{y}")
         self.icon_path = BASE_DIR + "/avatar.ico"
         self.root.iconbitmap(self.icon_path)
         self.root.protocol("WM_DELETE_WINDOW", self.hide_window)
